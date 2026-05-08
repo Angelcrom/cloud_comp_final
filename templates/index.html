@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upcoming Events On Campus</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f4f4;
+            margin: 40px;
+        }
+
+        h1 {
+            color: #000000;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .event-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 30px;
+        }
+
+        .event-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .event-meta {
+            color: #000000;
+            margin-top: 15px;
+        }
+
+        .delete-btn {
+            margin-top: 10px;
+            background: #651911;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: #a61505;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Upcoming Events on Campus</h1>
+
+{% if events %}
+    <ul>
+    {% for event in events %}
+        <li class="event-card">
+
+            <div class="event-title">
+                {{ event.title }}
+            </div>
+
+            <div class="event-meta">
+                {{ event.event_1 }} {{ event.event_2 }} <br>
+                {{ event.date }} <br>
+                {{ event.time }} at {{ event.location }}
+            </div>
+
+            <form action="/delete/{{ event.id }}" method="post">
+                <button class="delete-btn" type="submit">Delete</button>
+            </form>
+
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No events.</p>
+{% endif %}
+
+</body>
+</html>
